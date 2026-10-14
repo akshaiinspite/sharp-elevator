@@ -45,7 +45,7 @@ export default function AnnouncementMarquee() {
     <div className="announcement-marquee-wrapper" aria-label="Sharp Elevator Official Announcements">
       <div className="announcement-badge-affix">
         <span className="marquee-pulse-dot" />
-        <Volume2 size={22} className="marquee-bell-icon" />
+        <Volume2 size={16} className="marquee-bell-icon" />
         <span className="marquee-badge-title">ANNOUNCEMENTS</span>
       </div>
 
@@ -57,7 +57,7 @@ export default function AnnouncementMarquee() {
             return (
               <div key={`${item.id}-${idx}`} className="marquee-item">
                 <span className="marquee-tag">{item.tag}</span>
-                <Icon size={20} className="marquee-item-icon" />
+                <Icon size={14} className="marquee-item-icon" />
                 <span className="marquee-text">{item.text}</span>
                 <span className="marquee-separator" aria-hidden="true">◆</span>
               </div>
