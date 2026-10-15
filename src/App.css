@@ -527,7 +527,12 @@
 
 @media (max-width: 900px) {
   .hero-clear-overlay {
-    background: rgba(8, 13, 21, 0.78);
+    background: linear-gradient(
+      180deg,
+      rgba(8, 13, 21, 0.72) 0%,
+      rgba(8, 13, 21, 0.42) 45%,
+      rgba(8, 13, 21, 0.8) 100%
+    );
   }
 }
 
@@ -1531,6 +1536,15 @@
 
 .mosaic-base-img.animation-done {
   opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .mosaic-base-img {
+    opacity: 1 !important;
+  }
+  .mosaic-grid-overlay {
+    display: none !important;
+  }
 }
 
 .mosaic-grid-overlay {
@@ -3423,6 +3437,15 @@ body:has(.contact-page-white) .navbar-header {
 
 .aperture-reveal-wrapper.is-in-view .curtain-bottom {
   transform: translateX(102%);
+}
+
+@media (max-width: 768px) {
+  .aperture-curtain {
+    display: none !important;
+  }
+  .aperture-photo-asset {
+    transform: scale(1) !important;
+  }
 }
 
 .aperture-floating-caption {

@@ -12,11 +12,17 @@ export default function ApertureCurtainRevealImage({
   captionSubtitle,
   className = '',
 }) {
-  const [isVisible, setIsVisible] = useState(false);
+  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+  const [isVisible, setIsVisible] = useState(isMobile);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const containerRef = useRef(null);
 
   useEffect(() => {
+    if (isMobile) {
+      setIsVisible(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
@@ -24,7 +30,7 @@ export default function ApertureCurtainRevealImage({
           observer.disconnect();
         }
       },
-      { threshold: 0.25 }
+      { threshold: 0.05 }
     );
 
     if (containerRef.current) {
@@ -32,7 +38,7 @@ export default function ApertureCurtainRevealImage({
     }
 
     return () => observer.disconnect();
-  }, []);
+  }, [isMobile]);
 
   const handleMouseMove = (e) => {
     if (!containerRef.current) return;
