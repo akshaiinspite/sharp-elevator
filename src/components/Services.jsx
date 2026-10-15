@@ -120,6 +120,7 @@ export default function Services() {
   // Update guide position and path dashoffset based on a normalized progress (0 to 1)
   const updateGuideToProgress = useCallback((p) => {
     if (!mainPathRef.current || !roadmapRef.current) return;
+    if (typeof window !== 'undefined' && window.innerWidth <= 960) return;
 
     const clampedP = Math.max(0.01, Math.min(0.999, p));
     const total = pathLengthRef.current;
@@ -171,6 +172,7 @@ export default function Services() {
     let rafId = null;
 
     const handleScroll = () => {
+      if (typeof window !== 'undefined' && window.innerWidth <= 960) return;
       if (isHovering || !roadmapRef.current) return;
       if (rafId) cancelAnimationFrame(rafId);
 
