@@ -52,8 +52,11 @@ export default function Hero() {
 
           {/* Main Headline */}
           <motion.h1 variants={itemVariants} className="hero-headline">
-            Elevating Every Journey with <span className="text-gradient-gold">Safety</span> and{' '}
-            <span className="text-gradient-crimson">Reliability</span>
+            <span className="hero-headline-brand">Sharp Elevator &amp; Escalator</span>
+            <span className="hero-headline-tag">
+              Elevating Every Journey with <span className="text-gradient-gold">Safety</span> and{' '}
+              <span className="text-gradient-crimson">Reliability</span>
+            </span>
           </motion.h1>
 
           {/* Description */}

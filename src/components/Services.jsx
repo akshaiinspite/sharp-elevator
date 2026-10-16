@@ -51,7 +51,7 @@ export default function Services() {
       label: 'VETTING & SAFETY',
       labelIcon: Settings,
       description: 'Regular servicing to support safe, reliable, and efficient operation.',
-      image: '/service_maintenance.jpg',
+      image: '/station2.jpg',
       icon: Settings,
       positionClass: 'stop-right stop-2',
       features: [

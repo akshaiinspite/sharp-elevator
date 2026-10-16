@@ -5,17 +5,13 @@ import React, { useState, useEffect, useRef } from 'react';
  * Exactly reproduces the luxury spatial mosaic reveal pattern.
  */
 export default function MosaicRevealImage({ src, alt, className = '' }) {
-  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
-  const isReduced = isMobile || (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  const [isVisible, setIsVisible] = useState(true);
-  const [animationDone, setAnimationDone] = useState(isMobile);
+  const isReduced = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const [isVisible, setIsVisible] = useState(isReduced);
+  const [animationDone, setAnimationDone] = useState(isReduced);
   const containerRef = useRef(null);
 
   useEffect(() => {
-    if (isReduced) {
-      setAnimationDone(true);
-      return;
-    }
+    if (isReduced) return;
 
     let completionTimer;
     const observer = new IntersectionObserver(
@@ -25,11 +21,11 @@ export default function MosaicRevealImage({ src, alt, className = '' }) {
           // 1.5s timeout to hand off to base image and clean up overlay masks
           completionTimer = setTimeout(() => {
             setAnimationDone(true);
-          }, 1200);
+          }, 1500);
           observer.disconnect();
         }
       },
-      { threshold: 0.05 }
+      { threshold: 0.2 }
     );
 
     if (containerRef.current) {
@@ -40,7 +36,7 @@ export default function MosaicRevealImage({ src, alt, className = '' }) {
       observer.disconnect();
       if (completionTimer) clearTimeout(completionTimer);
     };
-  }, [isReduced, isMobile]);
+  }, [isReduced]);
 
   // Generate 3x3 matrix (9 tiles)
   // Each tile is positioned in a 3x3 CSS grid and references the exact 300% cropped slice of the background image

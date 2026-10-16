@@ -33,27 +33,23 @@ export default function Navbar({ currentPage, onNavigate }) {
   }, [mobileMenuOpen]);
 
   const navLinks = [
-    { name: 'Home', id: 'home' },
-    { name: 'About', id: 'about' },
-    { name: 'Services', id: 'services' },
+    { name: 'Home', id: 'home', href: '/' },
+    { name: 'About', id: 'about', href: '/about' },
+    { name: 'Services', id: 'services', href: '/services' },
     { name: 'Gallery', id: 'gallery', href: '#gallery' },
-    { name: 'Contact Us', id: 'contact' },
+    { name: 'Contact Us', id: 'contact', href: '/contact' },
   ];
 
   const handleLinkClick = (e, link) => {
     e.preventDefault();
     if (link.id === 'home') {
       onNavigate('home');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (link.id === 'about') {
       onNavigate('about');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (link.id === 'services') {
       onNavigate('services');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (link.id === 'contact') {
       onNavigate('contact');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       if (currentPage !== 'home') {
         onNavigate('home');
@@ -75,12 +71,11 @@ export default function Navbar({ currentPage, onNavigate }) {
         <div className="navbar-container">
           {/* Brand Logo - Significantly Bigger */}
           <a
-            href="#"
+            href="/"
             className="navbar-brand"
             onClick={(e) => {
               e.preventDefault();
               onNavigate('home');
-              window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
             aria-label="Sharp Elevator & Escalator Homepage"
           >

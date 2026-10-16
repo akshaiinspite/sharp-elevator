@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Preloader from './components/Preloader';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -9,18 +9,56 @@ import ContactSection from './components/ContactSection';
 import ContactPage from './components/ContactPage';
 import ServicesPage from './components/ServicesPage';
 import AboutPage from './components/AboutPage';
+import SEO from './components/SEO';
 import './App.css';
 
+const pathToPage = (path) => {
+  const clean = (path || '').replace(/\/+$/, '').toLowerCase();
+  if (clean === '/about') return 'about';
+  if (clean === '/services') return 'services';
+  if (clean === '/contact') return 'contact';
+  return 'home';
+};
+
+const pageToPath = (page) => {
+  if (page === 'about') return '/about';
+  if (page === 'services') return '/services';
+  if (page === 'contact') return '/contact';
+  return '/';
+};
+
 export default function App() {
-  const [currentPage, setCurrentPage] = useState('home'); // 'home' | 'about' | 'services' | 'contact'
+  const [currentPage, setCurrentPage] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return pathToPage(window.location.pathname);
+    }
+    return 'home';
+  });
+
+  useEffect(() => {
+    const handlePopState = () => {
+      setCurrentPage(pathToPage(window.location.pathname));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
 
   const handleNavigate = (page) => {
     setCurrentPage(page);
+    const targetPath = pageToPath(page);
+    if (window.location.pathname !== targetPath) {
+      window.history.pushState({ page }, '', targetPath);
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
     <div className="app-root">
+      {/* Dynamic SEO Meta Tags & Schema.org JSON-LD Structured Data */}
+      <SEO page={currentPage} />
+
       {/* Branded Loading Indicator */}
       <Preloader />
 
@@ -32,19 +70,19 @@ export default function App() {
         {currentPage === 'home' && (
           <>
             {/* Section 1 — Hero Banner */}
-            <Hero />
+            <Hero onNavigateServices={() => handleNavigate('services')} onNavigateContact={() => handleNavigate('contact')} />
 
             {/* Marquee Moving Announcements - Directly Below Hero Section */}
             <AnnouncementMarquee />
 
             {/* Section 2 — Our Core Services */}
-            <Services />
+            <Services onNavigateServices={() => handleNavigate('services')} />
 
             {/* Section 3 — Why Choose Sharp? */}
             <WhyChooseUs />
 
             {/* Section 4 — Let's Build Better Vertical Mobility & Office Information */}
-            <ContactSection />
+            <ContactSection onNavigateContact={() => handleNavigate('contact')} />
           </>
         )}
 
@@ -92,7 +130,7 @@ export default function App() {
         )}
 
         {currentPage === 'contact' && (
-          /* Dedicated Contact Us Menu Page (No Contact Form) */
+          /* Dedicated Contact Us Menu Page */
           <>
             <ContactPage onNavigateHome={() => handleNavigate('home')} />
             {/* Footer Information Strip */}
