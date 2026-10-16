@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 
 # Sitemaps
-Sitemap: https://sharpelevator.pages.dev/sitemap.xml
+Sitemap: https://sharpelevatorkerala.com/sitemap.xml

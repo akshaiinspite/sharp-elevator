@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-const SITE_URL = typeof window !== 'undefined' ? window.location.origin : 'https://sharpelevator.pages.dev';
+const SITE_URL = typeof window !== 'undefined' && window.location.origin.includes('http') ? window.location.origin : 'https://sharpelevatorkerala.com';
 const BRAND_NAME = 'Sharp Elevator & Escalator';
 const LOGO_URL = `${SITE_URL}/Sharp_Elevator_and_Escalator_Logo-removebg-preview.png`;
 const HERO_IMAGE_URL = `${SITE_URL}/hero_elevator.jpg`;
