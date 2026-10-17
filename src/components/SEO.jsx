@@ -27,6 +27,13 @@ export const PAGE_SEO_DATA = {
     path: '/services',
     type: 'website',
   },
+  gallery: {
+    title: 'Project Gallery & Lift Installations | Sharp Elevator & Escalator Kerala',
+    description: 'Explore verified on-site elevator installations by Sharp Elevator & Escalator across Kerala. Passenger lifts, stainless steel cabins, black glass touch operating panels, and polished granite landing lobbies.',
+    keywords: 'Sharp Elevator gallery, lift installation photos kerala, passenger elevator cabin interior, elevator landing doors ernakulam, elevator car operating panel, lift fixtures kochi, granite elevator architrave',
+    path: '/gallery',
+    type: 'website',
+  },
   contact: {
     title: 'Contact Sharp Elevator & Escalator | Ernakulam, Kochi - 24/7 Breakdown Support',
     description: 'Contact Sharp Elevator & Escalator at Mather Square, Ernakulam, Kerala. Call +91 94477 11587 or +91 94964 47558, or email sharpescalator@gmail.com for quotes, inspections, and 24/7 emergency support.',
@@ -36,7 +43,7 @@ export const PAGE_SEO_DATA = {
   },
 };
 
-function getStructuredData(page, currentUrl) {
+function getStructuredData(page, _currentUrl) {
   const baseBusiness = {
     '@type': ['LocalBusiness', 'ProfessionalService'],
     '@id': `${SITE_URL}/#organization`,
@@ -171,6 +178,10 @@ function getStructuredData(page, currentUrl) {
       { name: 'Home', item: SITE_URL },
       { name: 'Services', item: `${SITE_URL}/services` },
     ],
+    gallery: [
+      { name: 'Home', item: SITE_URL },
+      { name: 'Gallery', item: `${SITE_URL}/gallery` },
+    ],
     contact: [
       { name: 'Home', item: SITE_URL },
       { name: 'Contact Us', item: `${SITE_URL}/contact` },
@@ -188,6 +199,22 @@ function getStructuredData(page, currentUrl) {
   };
 
   const graph = [baseBusiness, website, breadcrumbList];
+
+  if (page === 'gallery') {
+    graph.push({
+      '@type': 'ImageGallery',
+      name: 'Sharp Elevator Real Installations Kerala',
+      description: 'Verified photographic gallery of passenger elevator installations, stainless steel cabin interiors, touch operating panels, and granite portal cladding by Sharp Elevator & Escalator.',
+      image: [
+        `${SITE_URL}/lift1.jpeg`,
+        `${SITE_URL}/lift2.jpeg`,
+        `${SITE_URL}/lift3.jpeg`,
+        `${SITE_URL}/lift4.jpeg`,
+        `${SITE_URL}/lift5.jpeg`,
+        `${SITE_URL}/lift6.jpeg`,
+      ],
+    });
+  }
 
   if (page === 'services') {
     graph.push({

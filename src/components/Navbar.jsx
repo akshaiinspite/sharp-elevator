@@ -36,7 +36,7 @@ export default function Navbar({ currentPage, onNavigate }) {
     { name: 'Home', id: 'home', href: '/' },
     { name: 'About', id: 'about', href: '/about' },
     { name: 'Services', id: 'services', href: '/services' },
-    { name: 'Gallery', id: 'gallery', href: '#gallery' },
+    { name: 'Gallery', id: 'gallery', href: '/gallery' },
     { name: 'Contact Us', id: 'contact', href: '/contact' },
   ];
 
@@ -48,6 +48,8 @@ export default function Navbar({ currentPage, onNavigate }) {
       onNavigate('about');
     } else if (link.id === 'services') {
       onNavigate('services');
+    } else if (link.id === 'gallery') {
+      onNavigate('gallery');
     } else if (link.id === 'contact') {
       onNavigate('contact');
     } else {
